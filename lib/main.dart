@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expressions/expressions.dart'; // External package for expression evaluation
+//import 'package:expressions/expressions.dart'; // External package for expression evaluation
 
 void main() {
   runApp(const MyApp());
@@ -61,10 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (_lastInput == 2) {
         _expressionNumbers.add(number);
         _expression += " $number";
-      } /*else if (_lastInput == 3) {
+      } else if (_lastInput == 3) {
         _expressionNumbers.last = _expressionNumbers.last * number;
         _expression += "$number";
-      }*/
+      }
       else if (_lastInput == 4) {
         return;
       }
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-/*
+
   //+/- button
   void _pressPositiveNegative() {
     setState(() {
@@ -98,9 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
         if (_expression == "-") {
           _expression = "0";
           _lastInput = 0;
-          _expressionNumbers.remove(-1);
+          _expressionNumbers.removeLast();
         } else {
-          _expressionNumbers.last = _expressionNumbers.last * -1;
+          //_expressionNumbers.last = _expressionNumbers.last * -1;
+          _expressionNumbers.removeLast();
           _expression = _expression.substring(0, (_expression.length - 2));
           _lastInput = 2;
         }
@@ -112,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return;
     });
   }
-*/
+
   //clear button
   void _pressClear() {
     setState(() {
@@ -230,6 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             //Text("$_lastInput"),
+            //Text("$_expressionNumbers"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: OverflowBar(
@@ -330,6 +332,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                       child: const Text('0'),
                       onPressed: () => _pressNumber(0),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(80, 40))),
+                  ElevatedButton(
+                      child: const Text('+/-'),
+                      onPressed: () => _pressPositiveNegative(),
                       style: ElevatedButton.styleFrom(
                           minimumSize: const Size(80, 40))),
                   ElevatedButton(
